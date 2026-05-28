@@ -3,6 +3,7 @@ import uuid
 import time
 import random
 import string
+from typing import Optional
 from dotenv import load_dotenv
 from boto3.dynamodb.conditions import Attr
 
@@ -32,7 +33,7 @@ def crear_sesion(alumno_id: int) -> dict:
     tabla.put_item(Item=item)
     return item
 
-def buscar_sesion_por_string(session_string: str) -> dict | None:
+def buscar_sesion_por_string(session_string: str) -> Optional[dict]:
 	tabla = dynamodb.Table(TABLA_SESIONES) #type: ignore
 	
 	respuesta = tabla.scan(
